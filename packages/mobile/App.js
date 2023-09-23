@@ -6,6 +6,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import SettingsScreen from "./screens/SettingsScreen";
 import HomeScreen from "./screens/HomeScreen";
+import FriendsScreen from "./screens/FriendsScreen"
+import AgendaScreen from "./screens/AgendaScreen"
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +20,7 @@ function MyTabs() {
         headerShown: false,
       }}
     >
+
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -28,6 +31,7 @@ function MyTabs() {
           ),
         }}
       />
+
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
@@ -38,6 +42,29 @@ function MyTabs() {
           ),
         }}
       />
+
+      <Tab.Screen
+        name="Friends"
+        component={FriendsScreen}
+        options={{
+          tabBarLabel: "Friends",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Agenda"
+        component={AgendaScreen}
+        options={{
+          tabBarLabel: "Agenda",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
     </Tab.Navigator>
   );
 }
@@ -57,5 +84,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
+  }
 });
