@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "470016788899",
+    "project_id": "schedulingwithfriends",
+    "storage_bucket": "schedulingwithfriends.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470016788899:android:7870a0d1b1d3b82e76b216",
+        "android_client_info": {
+          "package_name": "com.minihacks.geese"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbgdH9H0E5haH1cattcLI5_WgVn9W3jng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
