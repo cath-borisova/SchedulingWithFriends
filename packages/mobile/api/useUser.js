@@ -55,8 +55,22 @@ export default function useUser(userId) {
     // Check if user is not null before fetching friend data
     if (user) {
       fetchFriendsData();
+
+      //Make this call every 5 seconds
+      const interval = setInterval(() => {
+        fetchFriendsData();
+      }, 5000);
     }
   }, [user, user?.friends]); // Ensure you handle cases where user.friends may be null
 
+  //Make a new useEffect that will update the friends state when the user.friends array changes or
+  //when the friends data changes in the database. This will ensure that the friends state is always
+  //up to date with the latest data.
+
   return { user, events, friends };
 }
+
+// to use this hook, import it into the component you want to use it in and call it like this:
+// const { user, events, friends } = useUser(userId);
+//
+// userId is the id of the user you want to get data for.
