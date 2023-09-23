@@ -6,8 +6,12 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import SettingsScreen from "./screens/SettingsScreen";
 import HomeScreen from "./screens/HomeScreen";
+<<<<<<< Updated upstream
 import FriendsScreen from "./screens/FriendsScreen"
 import AgendaScreen from "./screens/AgendaScreen"
+=======
+import CreateEventScreen from "./screens/CreateEventScreen";
+>>>>>>> Stashed changes
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +46,7 @@ function MyTabs() {
           ),
         }}
       />
+<<<<<<< Updated upstream
 
       <Tab.Screen
         name="Friends"
@@ -64,7 +69,16 @@ function MyTabs() {
           ),
         }}
       />
-
+      <Tab.Screen
+        name="Event"
+        component={CreateEventScreen}
+        options={{
+          tabBarLabel: "Event",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
