@@ -1,47 +1,62 @@
-// Purpose: User component for mobile app.
 import { useEffect, useState } from "react";
 import firestore from "@react-native-firebase/firestore";
 
 export default function useUser(userId) {
   const [user, setUser] = useState(null);
   const [events, setEvents] = useState(null);
+  const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    const subscriber = firestore()
+    const userSubscriber = firestore()
       .collection("users")
       .doc(userId)
       .onSnapshot((documentSnapshot) => {
         setUser(documentSnapshot.data());
       });
 
-    // Stop listening for updates when no longer required
-    return () => subscriber();
-  }, [userId]);
-
-  // Event listener for user events
-  useEffect(() => {
-    const subscriber = firestore()
+    const eventsSubscriber = firestore()
       .collection("events")
       .where("friendsInvited", "array-contains", userId)
       .onSnapshot((querySnapshot) => {
-        const events = [];
-
-        querySnapshot.forEach((documentSnapshot) => {
-          events.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
-        });
-
+        const events = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          key: doc.id,
+        }));
         setEvents(events);
-        console.log("hi");
-        console.log("events", events);
       });
 
-    // Stop listening for updates when no longer required
-    return () => subscriber();
+    return () => {
+      userSubscriber();
+      eventsSubscriber();
+    };
   }, [userId]);
 
-  // Returns user and the events they are invited to
-  return { user, events };
+  useEffect(() => {
+    const fetchFriendsData = async () => {
+      if (user && user.friends && user.friends.length > 0) {
+        // Fetch friend data for the current set of friend IDs
+        const friendDataPromises = user.friends.map(async (friendId) => {
+          const friendDocument = await firestore()
+            .collection("users")
+            .doc(friendId)
+            .get();
+          return friendDocument.data();
+        });
+
+        const newFriends = await Promise.all(friendDataPromises);
+
+        // Check if newFriends is not null before updating friends state
+        if (newFriends !== null) {
+          setFriends(newFriends);
+        }
+      }
+    };
+
+    // Check if user is not null before fetching friend data
+    if (user) {
+      fetchFriendsData();
+    }
+  }, [user, user?.friends]); // Ensure you handle cases where user.friends may be null
+
+  return { user, events, friends };
 }
