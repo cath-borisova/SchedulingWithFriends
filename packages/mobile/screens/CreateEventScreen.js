@@ -4,11 +4,11 @@ import SelectBox from "react-native-multi-selectbox";
 import { xorBy } from "lodash";
 
 const K_OPTIONS = [
-  { item: "Julia", id: "JUVE" },
-  { item: "George", id: "RM" },
-  { item: "Katya", id: "BR" },
-  { item: "Filmore", id: "PSG" },
-  { item: "XxXMelloettaxXx", id: "FBM" },
+  { item: "Julia Truong", id: "JUVE" },
+  { item: "George Wuend", id: "RM" },
+  { item: "Anna Bamtise", id: "BR" },
+  { item: "Daniel Dowdle", id: "PSG" },
+  { item: "Evyn Sietsema", id: "FBM" },
 ];
 
 export default function CreateEventScreen({ onClose, eventArr, reservation }) {
