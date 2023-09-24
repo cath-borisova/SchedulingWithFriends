@@ -65,16 +65,6 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name="Event"
-        component={CreateEventScreen}
-        options={{
-          tabBarLabel: "Event",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
-        }}
-      />
     </Tab.Navigator>
   );
 }

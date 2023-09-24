@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Text, View, TextInput  } from 'react-native'
+import { Text, View, TextInput, TouchableOpacity   } from 'react-native'
 import SelectBox from 'react-native-multi-selectbox'
 import { xorBy } from 'lodash'
 
@@ -29,7 +29,8 @@ const K_OPTIONS = [
 ]
 
 
-export default function CreateEventScreen() {
+
+export default function CreateEventScreen( {onClose} ) {
   const [textTitle, setTextTitle] = useState('');
   const [textDesc, setTextDesc] = useState('');
 
@@ -73,8 +74,16 @@ export default function CreateEventScreen() {
         isMulti
         open={true}
       />
+
+      <TouchableOpacity
+        onPress={onClose}
+      >
+        <Text style={{alignSelf: 'flex-start'}}>Go Back</Text>
+      </TouchableOpacity>
+
     </View>
   )
+
 
   function onMultiChange() {
     return (item) => setSelectedTeams(xorBy(selectedTeams, [item], 'id'))
@@ -83,6 +92,7 @@ export default function CreateEventScreen() {
   function onChange() {
     return (val) => setSelectedTeam(val)
   }
+
 }
 
 

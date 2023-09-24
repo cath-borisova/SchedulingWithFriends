@@ -3,9 +3,6 @@ import { Alert, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import CreateEventScreen from "./CreateEventScreen";
 import {
   Agenda,
-  DateData,
-  AgendaEntry,
-  AgendaSchedule,
 } from "react-native-calendars";
 import testIDs from "../testIDs";
 
