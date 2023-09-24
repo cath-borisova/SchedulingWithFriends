@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import SettingsScreen from "./screens/SettingsScreen";
+import Notifications from "./screens/NotificationScreen";
 import HomeScreen from "./screens/HomeScreen";
 import FriendsScreen from "./screens/FriendsScreen"
 import AgendaScreen from "./screens/AgendaScreen"
@@ -34,23 +34,12 @@ function MyTabs() {
       />
 
       <Tab.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Notifications"
+        component={Notifications}
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "Notifications",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="Friends"
-        component={FriendsScreen}
-        options={{
-          tabBarLabel: "Friends",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
       />
@@ -65,6 +54,17 @@ function MyTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Friends"
+        component={FriendsScreen}
+        options={{
+          tabBarLabel: "Friends",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
     </Tab.Navigator>
   );
 }
