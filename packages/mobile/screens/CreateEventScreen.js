@@ -39,60 +39,44 @@ export default function CreateEventScreen({ onClose, eventArr, reservation }) {
   const friendName = reservation.name.split(" ")[0];
 
   return (
-    <View
-      style={{
-        margin: 30,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        height: "100%",
-      }}
-    >
-      <View>
-        <TextInput
-          style={{ fontSize: 29, paddingBottom: 20, paddingTop: 20 }}
-          placeholder="Add Event Name"
-          onChangeText={handleChangeTitle}
-          value={textTitle}
-        />
-        <TextInput
-          style={{ fontSize: 20, paddingBottom: 20 }}
-          multiline={true}
-          placeholder="Description"
-          onChangeText={handleChangeDescription}
-          value={textDesc}
-        />
-        <Text style={{ fontSize: 20, paddingBottom: 10 }}>
-          Date: {dayOfWeek} - {reservationDate.getHours() % 12}:00 -{" "}
-          {(reservationDate.getHours() % 12) + 1}:00
-        </Text>
+    <View style={{ margin: 30 }}>
 
-        <Text style={{ fontSize: 20, paddingBottom: 10 }}>
-          Invited friends:
-        </Text>
-        <Text style={{ fontSize: 20, paddingTop: 10 }}>{friendName}</Text>
+      <TextInput
+        style={{ fontSize: 29, paddingBottom: 20, paddingTop: 20 }}
+        placeholder="Add Event Name"
+        onChangeText={handleChangeTitle}
+        value={textTitle}
+      />
+      <TextInput
+        style={{ fontSize: 20, paddingBottom: 20 }}
+        multiline={true}
+        placeholder="Description"
+        onChangeText={handleChangeDescription}
+        value={textDesc}
+      />
+      <Text style={{ fontSize: 20, paddingBottom: 10 }}>
+        Date: {dayOfWeek} - {reservationDate.getHours() % 12}:00 -{" "}
+        {(reservationDate.getHours() % 12) + 1}:00
+      </Text>
 
-        <View style={{ height: 40 }} />
-        <Text style={{ fontSize: 20, paddingBottom: 10 }}>
-          Friends who are also free:
-        </Text>
-        <SelectBox
-          label="Select multiple"
-          options={K_OPTIONS}
-          selectedValues={selectedTeams}
-          onMultiSelect={onMultiChange}
-          onTapClose={onMultiChange}
-          isMulti
-          open={true}
-        />
-      </View>
+      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Invited friends:</Text>
+      <Text style={{ fontSize: 20, paddingTop: 10 }}>{friendName}</Text>
 
-      <TouchableOpacity
-        onPress={onClose}
-        style={{
-          marginBottom: 60,
-        }}
-      >
+      <View style={{ height: 40 }} />
+      <Text style={{ fontSize: 20, paddingBottom: 10 }}>
+        Friends who are also free:
+      </Text>
+      <SelectBox
+        label="Select multiple"
+        options={K_OPTIONS}
+        selectedValues={selectedTeams}
+        onMultiSelect={onMultiChange}
+        onTapClose={onMultiChange}
+        isMulti
+        open={true}
+      />
+
+      <TouchableOpacity onPress={onClose}>
         <Text style={{ alignSelf: "flex-start" }}>Go Back</Text>
       </TouchableOpacity>
     </View>

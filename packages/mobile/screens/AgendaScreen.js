@@ -176,7 +176,7 @@ class AgendaScreen extends Component {
         }
       >
         <Text
-          style={{ fontSize, color }}
+          style={{fontFamily: "JetBrainsMono-Regular", fontSize, color }}
         >{`${reservation.name} (${startTimeHours} - ${endTimeHours})`}</Text>
       </TouchableOpacity>
     );
