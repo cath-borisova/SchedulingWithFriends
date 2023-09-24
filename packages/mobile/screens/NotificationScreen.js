@@ -4,7 +4,9 @@ import firestore from "@react-native-firebase/firestore";
 import useUser from "../api/useUser";
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Dialog from "react-native-dialog";
 
+const usersCollection = firestore().collection("Users");
 
 export default function HomeScreen() {
   const userId = "oSyb1pRJCsCCTjf3pB6D";
