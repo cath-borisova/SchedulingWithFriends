@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Dimensions,
-  PixelRatio,
   StyleSheet,
   Alert,
   Text,
-  Button,
   Platform,
   SafeAreaView,
   TextInput,
@@ -155,7 +152,7 @@ export default function CreateEventScreen() {
               minimumDate={new Date()}
               is24Hours={false}
               display='default'
-              onChange={onStartDateTimeChange}
+              // onChange={onStartDateTimeChange}
             />)}
         </View>
         {/*<View stlye={styles.datetime}>*/}

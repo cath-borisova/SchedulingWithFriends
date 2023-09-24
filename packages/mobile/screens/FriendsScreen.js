@@ -1,47 +1,22 @@
-import { FlatList, SafeAreaView, ScrollView, Text, View } from "react-native";
-import React from "react";
-import { SWFStyleSheet } from "./StyleSheets";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import firestore from "@react-native-firebase/firestore";
 
-export default function SettingsScreen() {
+const usersCollection = firestore().collection("Users");
+
+export default function HomeScreen() {
+  const userId = "oSyb1pRJCsCCTjf3pB6D";
+  const [user, setUser] = useState(null);
+
   return (
-    //, justifyContent: "flex-start", alignItems: "center"
-    <View style={{justifyContent: "flex-start"}}>
-
-    <View style={{height: 20}}>
-    </View>
-    <SafeAreaView>
-    <FlatList data={DATA} renderItem={friend} keyExtractor={extract}>
-    </FlatList>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Friends</Text>
     </View>
   );
 }
-
-const friend = (obj) => (
-  <View>
-    <Text>
-      d
-      {obj}
-    </Text>
-  </View>
-);
-
-const extract = (obj, num) => {
-  return obj.title
-}
-
-
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Friend',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Friend',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Friend',
-  },
-];
