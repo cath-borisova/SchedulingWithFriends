@@ -4367,6 +4367,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/datetimepicker@npm:^7.6.0":
+  version: 7.6.0
+  resolution: "@react-native-community/datetimepicker@npm:7.6.0"
+  dependencies:
+    invariant: ^2.2.4
+  checksum: 029b37eba026137f49cfcc257025f78fecdd2aa621df326acf1763087cc586db18b311feb0e54f2524927a9b91210af411c1c50912bee795776f0f62e80ed47e
+  languageName: node
+  linkType: hard
+
 "@react-native-firebase/app@npm:^18.5.0":
   version: 18.5.0
   resolution: "@react-native-firebase/app@npm:18.5.0"
@@ -8887,6 +8896,8 @@ __metadata:
   dependencies:
     "@commitlint/cli": ^17.4.4
     "@commitlint/config-conventional": ^17.4.4
+    "@expo/vector-icons": ^13.0.0
+    "@react-native-community/datetimepicker": ^7.6.0
     "@typescript-eslint/eslint-plugin": ^4.28.5
     "@typescript-eslint/parser": ^4.28.5
     commitlint-plugin-function-rules: ^1.7.1
