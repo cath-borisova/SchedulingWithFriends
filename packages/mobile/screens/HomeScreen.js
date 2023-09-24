@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Button,
   Pressable,
@@ -12,6 +13,8 @@ import { StyleSheet } from "react-native";
 
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 
+import useUser from "../api/useUser";
+import AgendaScreen from "./AgendaScreen";
 
 const usersCollection = firestore().collection("Users");
 const styles = StyleSheet.create({
@@ -71,7 +74,17 @@ const styles = StyleSheet.create({
 });
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+
+  const handleSignInPress = () => {
+    navigation.navigate("Agenda"); // Navigate to the "Agenda" screen
+  };
+
+
   const userId = "oSyb1pRJCsCCTjf3pB6D";
+
+
+  const [showAgenda, setShowAgenda] = useState(false);
 
 
   // console.log("user", user);
@@ -111,7 +124,7 @@ export default function HomeScreen() {
             }}
           ></View>
 
-          <Pressable onPress={() => console.log("pressed")}>
+          <Pressable onPress={() => navigation.navigate('AgendaScreen')}>
             {({ pressed }) => (
               <Text style={[styles.button, pressed && styles.buttonPressed]}>
                 Forgot Password
@@ -126,7 +139,7 @@ export default function HomeScreen() {
 
           <Text style={styles.text}>Or</Text>
 
-          <Pressable onPress={() => console.log("pressed")}>
+          <Pressable onPress={handleSignInPress}>
             {({ pressed }) => (
               <Text style={[styles.google, pressed && styles.buttonPressed]}>
                 Sign in with Google
