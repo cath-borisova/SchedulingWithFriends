@@ -90,7 +90,7 @@ class AgendaScreen extends Component {
           })
         }
       >
-        <Text style={{ fontSize, color }}>{reservation.name}</Text>
+        <Text style={{fontFamily: "JetBrainsMono-Regular", fontSize, color }}>{reservation.name}</Text>
       </TouchableOpacity>
     );
   };

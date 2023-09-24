@@ -101,18 +101,18 @@ export default function HomeScreen() {
         <Text style={styles.title}>FRIENDS</Text>
         {addFriends &&
           <View style={styles.overlay}>
-            <Text style={{fontSize: normalizeHeight(30), marginBottom: 20,}}>
+            <Text style={{fontFamily: "JetBrainsMono-Regular", fontSize: normalizeHeight(30), marginBottom: 20,}}>
               Add a friend
             </Text>
             <TextInput
               editable
               maxLength={40}
-              placeholder="Email"
-              style={{fontSize: normalizeHeight(26), marginBottom: 30,}}
+              placeholder="Emails"
+              style={{fontFamily: "JetBrainsMono-Regular", fontSize: normalizeHeight(26), marginBottom: 30,}}
             />
             <View style={styles.row2}>
-              <Pressable onPress={() => addFriend()} style={{ flex:1, marginBottom: 15, alignSelf: 'flex-start'}}><Text style={{fontSize: normalizeHeight(26), alignSelf: 'center'}}>Add</Text></Pressable>
-              <Pressable style={{ flex:1, marginBottom: 15, alignSelf: 'flex-end'}} ><Text style={{fontSize: normalizeHeight(26), alignSelf: 'center'}}>Cancel</Text></Pressable>
+              <Pressable onPress={() => addFriend()} style={{fontFamily: "JetBrainsMono-Regular", flex:1, marginBottom: 15, alignSelf: 'flex-start'}}><Text style={{fontSize: normalizeHeight(26), alignSelf: 'center'}}>Add</Text></Pressable>
+              <Pressable style={{fontFamily: "JetBrainsMono-Regular", flex:1, marginBottom: 15, alignSelf: 'flex-end'}} ><Text style={{fontSize: normalizeHeight(26), alignSelf: 'center'}}>Cancel</Text></Pressable>
             </View>
 
           </View>
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: normalizeHeight(60),
-    fontFamily: 'jetbrains-mono',
+    fontSize: 70,
+    fontFamily: "JetBrainsMono-Regular",
     alignSelf: 'center',
     margin: 10,
     color: '#161826',
@@ -195,8 +195,9 @@ const styles = StyleSheet.create({
     flex: 6,
   },
   friendText : {
-    fontSize: normalizeHeight(30),
+    fontSize: 16,
     flex: 1,
+    fontFamily: "JetBrainsMono-Regular",
   },
   icon : {
     color: '#161826',

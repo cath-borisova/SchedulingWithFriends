@@ -49,22 +49,22 @@ export default function CreateEventScreen( {onClose} ) {
       <View style={{ width: '100%', alignItems: 'center' }}>
       </View>
       <TextInput
-        style={{ fontSize: 29, paddingBottom: 20, paddingTop: 20}}
+        style={{fontFamily: "JetBrainsMono-Regular", fontSize: 29, paddingBottom: 20, paddingTop: 20}}
         placeholder="Add Event Name"
         onChangeText={handleChangeTitle}
         value={textTitle}
       />
       <TextInput
-        style={{ fontSize: 20, paddingBottom: 20}}
+        style={{fontFamily: "JetBrainsMono-Regular", fontSize: 20, paddingBottom: 20}}
         multiline={true}
         placeholder="Description"
         onChangeText={handleChangeDescription}
         value={textDesc}
       />
-      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Invited friends:</Text>
-      <Text style={{ fontSize: 20, paddingTop: 10}}>Bob</Text>
+      <Text style={{fontFamily: "JetBrainsMono-Regular", fontSize: 20, paddingBottom: 10 }}>Invited friends:</Text>
+      <Text style={{fontFamily: "JetBrainsMono-Regular", fontSize: 20, paddingTop: 10}}>Bob</Text>
       <View style={{ height: 40 }} />
-      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Friends who are also free:</Text>
+      <Text style={{fontFamily: "JetBrainsMono-Regular", fontSize: 20, paddingBottom: 10 }}>Friends who are also free:</Text>
       <SelectBox
         label="Select multiple"
         options={K_OPTIONS}
@@ -78,7 +78,7 @@ export default function CreateEventScreen( {onClose} ) {
       <TouchableOpacity
         onPress={onClose}
       >
-        <Text style={{alignSelf: 'flex-start'}}>Go Back</Text>
+        <Text style={{fontFamily: "JetBrainsMono-Regular", alignSelf: 'flex-start'}}>Go Back</Text>
       </TouchableOpacity>
 
     </View>

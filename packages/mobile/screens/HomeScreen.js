@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {styles} from "../styles";
 import { useNavigation } from "@react-navigation/native";
 import {
   Button,
@@ -17,61 +18,6 @@ import useUser from "../api/useUser";
 import AgendaScreen from "./AgendaScreen";
 
 const usersCollection = firestore().collection("Users");
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, // This ensures the container takes up the whole screen
-  },
-  background: {
-    flex: 1, // This makes the background take up the whole screen
-    resizeMode: "center",
-    width: "100%", // Ensure it covers the entire width of the screen
-    height: "100%", // Ensure it covers the entire height of the screen
-    justifyContent: "center", // Center vertically
-    alignItems: "center", // Center horizontally
-  },
-
-  title: {
-    fontSize: 70,
-    color: "black",
-    fontFamily: "JetBrainsMono-Regular",
-  },
-
-  text: {
-    fontSize: 16,
-    fontFamily: "JetBrainsMono-Regular",
-  },
-
-  input: {
-    height: normalizeHeight(40), // 40
-    width: normalizeWidth(200), // 200
-    borderColor: "gray",
-    borderWidth: 1,
-    backgroundColor: "white",
-    borderRadius: 10,
-    textAlign: "center",
-    fontFamily: "JetBrainsMono-Regular",
-  },
-  button: {
-    padding: 10,
-    borderRadius: 5,
-    alignSelf: "center",
-  },
-  buttonPressed: {
-    opacity: 0.6,
-  },
-  google: {
-    backgroundColor: "white", // Google blue color
-    padding: 8,
-    width: normalizeWidth(200), // 200
-    borderRadius: 10,
-    borderColor: "gray",
-    borderWidth: 1,
-    textAlign: "center",
-    alignSelf: "center",
-    marginTop: 20,
-    fontFamily: "JetBrainsMono-Regular",
-  },
-});
 
 export default function HomeScreen() {
   const navigation = useNavigation();
