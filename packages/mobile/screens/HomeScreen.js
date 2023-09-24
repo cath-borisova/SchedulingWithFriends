@@ -9,15 +9,12 @@ import {
   TextInput,
   View,
 } from "react-native";
-import firestore from "@react-native-firebase/firestore";
 import { StyleSheet } from "react-native";
 
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 
-import useUser from "../api/useUser";
 import AgendaScreen from "./AgendaScreen";
 
-const usersCollection = firestore().collection("Users");
 
 export default function HomeScreen() {
   const navigation = useNavigation();
