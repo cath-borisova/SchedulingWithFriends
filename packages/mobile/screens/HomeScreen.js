@@ -12,7 +12,6 @@ import { StyleSheet } from "react-native";
 
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 
-import useUser from "../api/useUser";
 
 const usersCollection = firestore().collection("Users");
 const styles = StyleSheet.create({
@@ -74,7 +73,6 @@ const styles = StyleSheet.create({
 export default function HomeScreen() {
   const userId = "oSyb1pRJCsCCTjf3pB6D";
 
-  const { user, events, friends } = useUser(userId);
 
   // console.log("user", user);
 
