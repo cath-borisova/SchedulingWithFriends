@@ -9,12 +9,6 @@ import {
 } from "react-native";
 import firestore from "@react-native-firebase/firestore";
 import { StyleSheet } from "react-native";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
-
-GoogleSignin.configure({
-  webClientId:
-    "470016788899-g5nnficdbvkdroefhc9mqpcthhsrkebk.apps.googleusercontent.com",
-});
 
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 
