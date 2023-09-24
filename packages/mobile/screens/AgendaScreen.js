@@ -47,24 +47,28 @@ class AgendaScreen extends Component {
     const items = this.state.items || {};
     const eventChoices = [
       {
-        item: "Julia",
+        item: "Anna Bamtise",
         id: "JUVE",
       },
       {
-        item: "George",
+        item: "Katya Borisova",
         id: "RM",
       },
       {
-        item: "Katya",
+        item: "Gregor Wuend",
         id: "BR",
       },
       {
-        item: "Filmore",
+        item: "Evyn Sietsema",
         id: "PSG",
       },
       {
-        item: "XxXMelloettaxXx",
+        item: "Max Brooksen",
         id: "FBM",
+      },
+      {
+        item: "Jessica Peterson",
+        id: "JUVE",
       },
     ];
 

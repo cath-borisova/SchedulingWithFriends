@@ -36,6 +36,8 @@ export default function CreateEventScreen({ onClose, eventArr, reservation }) {
     );
   };
 
+  const friendName = reservation.name.split(" ")[0];
+
   return (
     <View style={{ margin: 30 }}>
       <TextInput
@@ -57,7 +59,7 @@ export default function CreateEventScreen({ onClose, eventArr, reservation }) {
       </Text>
 
       <Text style={{ fontSize: 20, paddingBottom: 10 }}>Invited friends:</Text>
-      <Text style={{ fontSize: 20, paddingTop: 10 }}>Bob</Text>
+      <Text style={{ fontSize: 20, paddingTop: 10 }}>{friendName}</Text>
 
       <View style={{ height: 40 }} />
       <Text style={{ fontSize: 20, paddingBottom: 10 }}>
