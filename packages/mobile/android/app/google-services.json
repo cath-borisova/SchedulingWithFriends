@@ -12,7 +12,20 @@
           "package_name": "com.minihacks.geese"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "470016788899-otor4e92qgaedtns1gel58590i3pgqip.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.minihacks.geese",
+            "certificate_hash": "54e4ec54404bed67e72a4b5373437f392b8457a3"
+          }
+        },
+        {
+          "client_id": "470016788899-g5nnficdbvkdroefhc9mqpcthhsrkebk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCbgdH9H0E5haH1cattcLI5_WgVn9W3jng"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470016788899-g5nnficdbvkdroefhc9mqpcthhsrkebk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
