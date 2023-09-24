@@ -28,6 +28,7 @@ const K_OPTIONS = [
   }
 ]
 
+
 export default function CreateEventScreen() {
   const [textTitle, setTextTitle] = useState('');
   const [textDesc, setTextDesc] = useState('');
@@ -74,8 +75,6 @@ export default function CreateEventScreen() {
       />
     </View>
   )
-
-
 
   function onMultiChange() {
     return (item) => setSelectedTeams(xorBy(selectedTeams, [item], 'id'))

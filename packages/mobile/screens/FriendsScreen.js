@@ -1,42 +1,22 @@
-import { ScrollView, Text, View } from "react-native";
-import React from "react";
-import { SWFStyleSheet } from "./StyleSheets";
+import React, { useEffect, useState } from "react";
+import { Text, View } from "react-native";
+import firestore from "@react-native-firebase/firestore";
 
-export default function SettingsScreen() {
+const usersCollection = firestore().collection("Users");
+
+export default function HomeScreen() {
+  const userId = "oSyb1pRJCsCCTjf3pB6D";
+  const [user, setUser] = useState(null);
+
   return (
-    //, justifyContent: "flex-start", alignItems: "center"
-    <View>
-      <View style={{flex: 0.1}}>
-
-      </View>
-
-    <ScrollView style={{ flex: 1}}>
-
-        <Text>
-          Friends
-        </Text>
-        <Text style={SWFStyleSheet.asd}>
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}ads {"\n"}
-          ads {"\n"}
-          ads {"\n"}ads {"\n"}ads {"\n"}ads {"\n"}ads {"\n"}ads {"\n"}ads {"\n"}ads {"\n"}
-
-          asd
-        </Text>
-      <Text>
-        Hello
-      </Text>
-    </ScrollView>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Friends</Text>
     </View>
   );
 }
