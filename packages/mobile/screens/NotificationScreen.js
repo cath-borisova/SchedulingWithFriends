@@ -7,13 +7,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function HomeScreen() {
   const userId = "QBrgmKh2gnsjcUMt5c5f";
-  let personA = false;
+  let personA = true;
   let notifications = [];
 
   if (personA){
     notifications = ['Max Brooksen has invited you to hangout.', 'Gregor Wuend has accepted your invite to hangout', 'Sam Browning has sent you a friend request.',
-    'Jessica Peterson has accepted your friend request.', 'Katya Borisova has invited you to hangout.',
-      'Katya Borisova has accepted your invite to hangout!', 'Anna Bamtise has invited you to hangout.',
+    'Jessica Peterson has accepted your friend request.', 'Julia Truong has invited you to hangout.',
+      'Julia Truong has accepted your invite to hangout!', 'Anna Bamtise has invited you to hangout.',
       'Gregor Wuend has invited you to hangout.']
   }
 
@@ -28,8 +28,8 @@ export default function HomeScreen() {
   const addNotification = () => {
     if (personA) {
       setDisplay(['Daniel Dowdle has accepted your friend request.', 'Max Brooksen has invited you to hangout.', 'Gregor Wuend has accepted your invite to hangout', 'Sam Browning has sent you a friend request.',
-        'Jessica Peterson has accepted your friend request.', 'Katya Borisova has invited you to hangout.',
-        'Katya Borisova has accepted your invite to hangout!', 'Anna Bamtise has invited you to hangout.',
+        'Jessica Peterson has accepted your friend request.', 'Julia Truong has invited you to hangout.',
+        'Julia Truong has accepted your invite to hangout!', 'Anna Bamtise has invited you to hangout.',
         'Gregor Wuend has invited you to hangout.'])
     } else {
       setDisplay(['Julia Truong has sent you a friend request.']);
@@ -84,8 +84,9 @@ export default function HomeScreen() {
               </View>
             );
           }
-          return rows;
+
         }
+    return rows;
         }
   return (
     <View style={styles.container}>
