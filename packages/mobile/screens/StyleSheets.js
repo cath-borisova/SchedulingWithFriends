@@ -8,3 +8,5 @@ export const SWFStyleSheet = StyleSheet.create({
     fontSize: 30
   }
 })
+
+//export const Temp = StyleSheet.compose()

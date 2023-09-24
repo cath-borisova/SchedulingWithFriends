@@ -39,5 +39,10 @@
     "husky": "^8.0.0",
     "nodemon": "^2.0.19",
     "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
+    "@react-native-community/datetimepicker": "^7.6.0",
+    "react-native-calendars": "^1.1301.0"
   }
 }
