@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     marginTop: 20,
+    fontFamily: "JetBrainsMono-Regular",
   },
 });
 
