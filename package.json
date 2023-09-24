@@ -39,5 +39,9 @@
     "husky": "^8.0.0",
     "nodemon": "^2.0.19",
     "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "^7.6.0",
+    "lodash": "^4.17.21"
   }
 }
