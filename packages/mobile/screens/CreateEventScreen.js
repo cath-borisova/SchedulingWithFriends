@@ -7,58 +7,25 @@ import { xorBy } from 'lodash'
 
 const K_OPTIONS = [
   {
-    item: 'Juventus',
+    item: 'Julia',
     id: 'JUVE',
   },
   {
-    item: 'Real Madrid',
+    item: 'George',
     id: 'RM',
   },
   {
-    item: 'Barcelona',
+    item: 'Katya',
     id: 'BR',
   },
   {
-    item: 'PSG',
+    item: 'Filmore',
     id: 'PSG',
   },
   {
-    item: 'FC Bayern Munich',
+    item: 'XxXMelloettaxXx',
     id: 'FBM',
-  },
-  {
-    item: 'Manchester United FC',
-    id: 'MUN',
-  },
-  {
-    item: 'Manchester City FC',
-    id: 'MCI',
-  },
-  {
-    item: 'Everton FC',
-    id: 'EVE',
-  },
-  {
-    item: 'Tottenham Hotspur FC',
-    id: 'TOT',
-  },
-  {
-    item: 'Chelsea FC',
-    id: 'CHE',
-  },
-  {
-    item: 'Liverpool FC',
-    id: 'LIV',
-  },
-  {
-    item: 'Arsenal FC',
-    id: 'ARS',
-  },
-
-  {
-    item: 'Leicester City FC',
-    id: 'LEI',
-  },
+  }
 ]
 
 export default function CreateEventScreen() {
@@ -92,24 +59,18 @@ export default function CreateEventScreen() {
         onChangeText={handleChangeDescription}
         value={textDesc}
       />
-      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Select Demo</Text>
-      <SelectBox
-        label="Select single"
-        options={K_OPTIONS}
-        value={selectedTeam}
-        onChange={onChange()}
-        hideInputFilter={false}
-      />
+      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Invited friends:</Text>
+      <Text style={{ fontSize: 20, paddingTop: 10}}>Bob</Text>
       <View style={{ height: 40 }} />
-      <Text style={{ fontSize: 20, paddingBottom: 10 }}>MultiSelect Demo</Text>
+      <Text style={{ fontSize: 20, paddingBottom: 10 }}>Friends who are also free:</Text>
       <SelectBox
-        multiline={true}
         label="Select multiple"
         options={K_OPTIONS}
         selectedValues={selectedTeams}
         onMultiSelect={onMultiChange()}
         onTapClose={onMultiChange()}
         isMulti
+        open={true}
       />
     </View>
   )
