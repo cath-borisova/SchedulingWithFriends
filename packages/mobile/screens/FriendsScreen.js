@@ -12,6 +12,12 @@ export default function HomeScreen() {
   const {displayFriends, setDisplayFriends} = useState(friends);
   const [search, setSearch] = useState('');
 
+export default function HomeScreen() {
+  const userId = "oSyb1pRJCsCCTjf3pB6D";
+  // const [user, setUser] = useState(null);
+
+  const { user, events, friends } = useUser(userId);
+
   const addFriend = () => {
     console.log("here");
   }
@@ -114,6 +120,10 @@ export default function HomeScreen() {
         {displayFriendRows(displayFriends)}
       </View>
 
+      <Text>Friends</Text>
+      {friends.map((friend) => (
+        <Text key={friend.id}>{friend.name}</Text>
+      ))}
     </View>
   );
 }
