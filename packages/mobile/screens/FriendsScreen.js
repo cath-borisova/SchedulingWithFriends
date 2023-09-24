@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Image, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import firestore from "@react-native-firebase/firestore";
-import useUser from "../api/useUser";
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -18,8 +16,11 @@ export default function HomeScreen() {
   }
   const [search, setSearch] = useState('');
   const [addFriends, setAddFriends] = useState(false);
+  const [displayF, setDisplay] = useState(friends);
   const addFriend = () => {
     setAddFriends(false);
+    console.log("here");
+    displayF.push('Anna Bamtise');
 
   }
   const deleteFriend = (friendName) => {
@@ -33,13 +34,13 @@ export default function HomeScreen() {
     )
   }
   const displayFriendRows = (typeOfFriends) => {
+    console.log(displayF);
+    console.log(search);
     let rows = [];
     let index = 0;
-    for(let i = 0; i < friends.length; i++ ){
-      if(search === '' || search === friends[i].substring(0, search.length)) {
-        const searchFriends = () => {
+    for(let i = 0; i < displayF.length; i++ ){
+      if(search === '' || search === displayF[i].substring(0, search.length)) {
 
-        }
         // let eventTogether = false;
         // for(let i = 0; i < events.length; i++){
         //   console.log("events[i] ", events[i]);
@@ -78,10 +79,10 @@ export default function HomeScreen() {
                 source={{
                   uri: friendImages[index],
                 }} />
-              <Text style={styles.friendText} numberOfLines={1}>{friends[i]}</Text>
+              <Text style={styles.friendText} numberOfLines={1}>{displayF[i]}</Text>
             </View>
             <Icon style={styles.icon} size={30} name="calendar" />
-            <Pressable style={styles.pressX} onPress={() => deleteFriend(friends[i])}>
+            <Pressable style={styles.pressX} onPress={() => deleteFriend(displayF[i])}>
               <Text style={styles.delete}>X</Text>
             </Pressable>
           </View>
@@ -136,8 +137,7 @@ export default function HomeScreen() {
           <Icon style={styles.icon} size={normalizeHeight(50)} name="account-plus" />
           </Pressable>
         </View>
-
-        {displayFriendRows(friends)}
+        {displayFriendRows(displayF)}
       </View>
     </View>
   );

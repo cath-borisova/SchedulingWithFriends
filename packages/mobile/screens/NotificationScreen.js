@@ -1,115 +1,93 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Image, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import firestore, { firebase } from "@react-native-firebase/firestore";
-import useUser from "../api/useUser";
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getAllNotifications} from '../api/notificationCRUD.js';
 
 
 
 export default function HomeScreen() {
   const userId = "QBrgmKh2gnsjcUMt5c5f";
-  const { user, events, friends, notFriends} = useUser(userId);
-  console.log("line 15 not friends: ", notFriends);
 
-  const acceptFriendRequest = (friendId) => {
-    const usersCollectionRef = firebase.firestore().collection('users');
-    const notif = {"friendrequestaccepted" : userId}
-        usersCollectionRef
-          .doc(friendId)
-          .update({
-            ['notifications']: firebase.firestore.FieldValue.arrayUnion(notif),
-          })
-    // const usersCollectionRef2 = firebase.firestore().collection('users');
-    // usersCollectionRef2
-    //   .doc(userId)
-    //   .update({
-    //     ['friends']: firebase.firestore.FieldValue.arrayUnion(findPerson(friendId)),
-    //   })
-
-    console.log("Accepted!");
-  }
-  const displayNotifications = () => {
-    let rows = []
-    let num = 0;
-
-    if (user && user.notifications) {
-      user.notifications.forEach((notif) => {
-        console.log(notif);
-        if (notif['friendrequest']) {
-          console.log("notif: ", notif['friendrequest'])
-          const usersCollectionRef = firebase.firestore().collection('users');
-          // let person = findPerson(notif['friendrequest']);
-
-          notFriends.forEach((otherUser) => {
-            if (otherUser.id === notif['friendrequest']){
-                usersCollectionRef
-                .doc(otherUser.id)
-                .update({
-                  ['friends']: firebase.firestore.FieldValue.arrayUnion(otherUser),
-                })
-            }
-          });
-
-            // <View key={num} style={styles.list}>
-            //   {/*<Text style={styles.notiftext}>{person.data.name} has sent you a friend request.</Text>*/}
-            //   <Pressable onPress={() => acceptFriendRequest(notif['friendrequest'].id)}><Text>Accept</Text></Pressable>
-            //   <View style={styles.horizontalLine} />
-            // </View>
-          // );
-        } else if (notif['longtime']) {
-          let person = findPerson(notif['longtime']);
-          rows.push(
-            <View key={num} style={styles.list}>
-              <Text style={styles.notiftext}>It's been awhile since you've hung out with {person.data.name}...</Text>
-              <View style={styles.horizontalLine} />
-            </View>
-          );
-        } else if (notif['calinvite']) {
-          let person = findPerson(notif['calinvite']);
-          rows.push(
-            <View key={num} style={styles.list}>
-              <Text style={styles.notiftext}>{person.data.name} has sent you a calendar invite.
-                Click here to accept or deny.</Text>
-              <View style={styles.horizontalLine} />
-            </View>
-          );
-        } else if (notif['friendrequestapproved']) {
-          let person = findPerson(notif['friendrequestapproved']);
-              usersCollectionRef
-                .doc(userId)
-                .update({
-                  ['friends']: firebase.firestore.FieldValue.arrayUnion(person),
-                })
-          rows.push(
-            <View key={num} style={styles.list}>
-              <Text style={styles.notiftext}>{person.data.name} has approved your friend request!</Text>
-              <View style={styles.horizontalLine} />
-            </View>
-          );
-        } else if (notif['approvedcalendarinvite']) {
-          let person = findPerson(notif['approvedcalendarinvite']);
-          rows.push(
-            <View key={num} style={styles.list}>
-              <Text style={styles.notiftext}>{person.data.name} has accepted your calendar invite!</Text>
-              <View style={styles.horizontalLine} />
-            </View>
-          );
-        }
-        num += 1;
-      });
-
-      return rows;
-    }
-    return (<Text> </Text>);
-  }
+  // const displayNotifications = () => {
+  //   let rows = []
+  //   let num = 0;
+  //
+  //   if (user && user.notifications) {
+  //     user.notifications.forEach((notif) => {
+  //       console.log(notif);
+  //       if (notif['friendrequest']) {
+  //         console.log("notif: ", notif['friendrequest'])
+  //         const usersCollectionRef = firebase.firestore().collection('users');
+  //         // let person = findPerson(notif['friendrequest']);
+  //
+  //         notFriends.forEach((otherUser) => {
+  //           if (otherUser.id === notif['friendrequest']){
+  //               usersCollectionRef
+  //               .doc(otherUser.id)
+  //               .update({
+  //                 ['friends']: firebase.firestore.FieldValue.arrayUnion(otherUser),
+  //               })
+  //           }
+  //         });
+  //
+  //           // <View key={num} style={styles.list}>
+  //           //   {/*<Text style={styles.notiftext}>{person.data.name} has sent you a friend request.</Text>*/}
+  //           //   <Pressable onPress={() => acceptFriendRequest(notif['friendrequest'].id)}><Text>Accept</Text></Pressable>
+  //           //   <View style={styles.horizontalLine} />
+  //           // </View>
+  //         // );
+  //       } else if (notif['longtime']) {
+  //         let person = findPerson(notif['longtime']);
+  //         rows.push(
+  //           <View key={num} style={styles.list}>
+  //             <Text style={styles.notiftext}>It's been awhile since you've hung out with {person.data.name}...</Text>
+  //             <View style={styles.horizontalLine} />
+  //           </View>
+  //         );
+  //       } else if (notif['calinvite']) {
+  //         let person = findPerson(notif['calinvite']);
+  //         rows.push(
+  //           <View key={num} style={styles.list}>
+  //             <Text style={styles.notiftext}>{person.data.name} has sent you a calendar invite.
+  //               Click here to accept or deny.</Text>
+  //             <View style={styles.horizontalLine} />
+  //           </View>
+  //         );
+  //       } else if (notif['friendrequestapproved']) {
+  //         let person = findPerson(notif['friendrequestapproved']);
+  //             usersCollectionRef
+  //               .doc(userId)
+  //               .update({
+  //                 ['friends']: firebase.firestore.FieldValue.arrayUnion(person),
+  //               })
+  //         rows.push(
+  //           <View key={num} style={styles.list}>
+  //             <Text style={styles.notiftext}>{person.data.name} has approved your friend request!</Text>
+  //             <View style={styles.horizontalLine} />
+  //           </View>
+  //         );
+  //       } else if (notif['approvedcalendarinvite']) {
+  //         let person = findPerson(notif['approvedcalendarinvite']);
+  //         rows.push(
+  //           <View key={num} style={styles.list}>
+  //             <Text style={styles.notiftext}>{person.data.name} has accepted your calendar invite!</Text>
+  //             <View style={styles.horizontalLine} />
+  //           </View>
+  //         );
+  //       }
+  //       num += 1;
+  //     });
+  //
+  //     return rows;
+  //   }
+  //   return (<Text> </Text>);
+  // }
   return (
     <View style={styles.container}>
       <View syle={styles.list}>
         <Text style={styles.title}>NOTIFICATIONS</Text>
         <View style={styles.horizontalLine} />
-          {displayNotifications()}
+         Hello
       </View>
     </View>
   );
@@ -163,7 +141,6 @@ const styles = StyleSheet.create({
       ios: {
         shadowColor: 'black',
         shadowOpacity: 0.5,
-        shadowOffset: { width: 0, height: 2 },
         shadowRadius: 2,
       },
       android: {
