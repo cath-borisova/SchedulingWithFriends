@@ -1,121 +1,116 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import firestore from "@react-native-firebase/firestore";
+import { Alert, Image, Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import firestore, { firebase } from "@react-native-firebase/firestore";
 import useUser from "../api/useUser";
 import { normalizeWidth, normalizeHeight } from "./Responsive";
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Dialog from "react-native-dialog";
+import { getAllNotifications} from '../api/notificationCRUD.js';
 
-const usersCollection = firestore().collection("Users");
+
 
 export default function HomeScreen() {
-  const userId = "oSyb1pRJCsCCTjf3pB6D";
-  const { user, events, friends} = useUser(userId);
-  const {displayFriends, setDisplayFriends} = useState(friends);
-  const [search, setSearch] = useState('');
+  const userId = "QBrgmKh2gnsjcUMt5c5f";
+  const { user, events, friends, notFriends} = useUser(userId);
+  console.log("line 15 not friends: ", notFriends);
 
-  const addFriend = () => {
-    console.log("here");
+  const acceptFriendRequest = (friendId) => {
+    const usersCollectionRef = firebase.firestore().collection('users');
+    const notif = {"friendrequestaccepted" : userId}
+        usersCollectionRef
+          .doc(friendId)
+          .update({
+            ['notifications']: firebase.firestore.FieldValue.arrayUnion(notif),
+          })
+    // const usersCollectionRef2 = firebase.firestore().collection('users');
+    // usersCollectionRef2
+    //   .doc(userId)
+    //   .update({
+    //     ['friends']: firebase.firestore.FieldValue.arrayUnion(findPerson(friendId)),
+    //   })
+
+    console.log("Accepted!");
   }
-  const deleteFriend = (friendName) => {
-    Alert.alert(
-      'Remove Friend',
-      'Are you sure you want to remove ' + friendName + "?",
-      [
-        { text: 'Yes', onPress: () => console.log('OK Pressed') },
-        { text: 'No', onPress: () => console.log('No Pressed') },
-      ]
-    )
-  }
-  const displayFriendRows = (typeOfFriends) => {
-    let rows = [];
-    friends.forEach((friend) => {
+  const displayNotifications = () => {
+    let rows = []
+    let num = 0;
 
-      const friendId = friend.id; // Friend's ID
-      const friendData = friend.data; // Friend's data
-      if(search === '' || search === friend.data.name.substring(0, search.length)) {
-        const searchFriends = () => {
+    if (user && user.notifications) {
+      user.notifications.forEach((notif) => {
+        console.log(notif);
+        if (notif['friendrequest']) {
+          console.log("notif: ", notif['friendrequest'])
+          const usersCollectionRef = firebase.firestore().collection('users');
+          // let person = findPerson(notif['friendrequest']);
 
-        }
-        // let eventTogether = false;
-        // for(let i = 0; i < events.length; i++){
-        //   console.log("events[i] ", events[i]);
-        //   for(let j = 0; j < events[i].friendsInvited.length; j++){
-        //     console.log("events[i].friendsInvited ", events[i].friendsInvited);
-        //     if (events[i].friendsInvited[j] == friendId){
-        //       eventTogether = true;
-        //       break;
-        //     }
-        //     if(eventTogether){
-        //       break;
-        //     }
-        //   }
-        // }
+          notFriends.forEach((otherUser) => {
+            if (otherUser.id === notif['friendrequest']){
+                usersCollectionRef
+                .doc(otherUser.id)
+                .update({
+                  ['friends']: firebase.firestore.FieldValue.arrayUnion(otherUser),
+                })
+            }
+          });
 
-        //   if(eventTogether){
-        //     rows.push(
-        //       <View style={styles.row}>
-        //         <View style={styles.person}>
-        //           <Image
-        //             style={styles.pfp}
-        //             source={{
-        //               uri: 'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnVubnklMjBjYXR8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
-        //             }}/>
-        //           <Text style={styles.friendText} numberOfLines={1}>{friendData.name}</Text>
-        //         </View>
-        //         <Icon style={styles.icon} size={30} name="calendar" />
-        //       </View>
-        //     );
-        // } else {
-        rows.push(
-          <View style={styles.row}>
-            <View style={styles.person}>
-              <Image
-                style={styles.pfp}
-                source={{
-                  uri: 'https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnVubnklMjBjYXR8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
-                }} />
-              <Text style={styles.friendText} numberOfLines={1}>{friendData.name}</Text>
+            // <View key={num} style={styles.list}>
+            //   {/*<Text style={styles.notiftext}>{person.data.name} has sent you a friend request.</Text>*/}
+            //   <Pressable onPress={() => acceptFriendRequest(notif['friendrequest'].id)}><Text>Accept</Text></Pressable>
+            //   <View style={styles.horizontalLine} />
+            // </View>
+          // );
+        } else if (notif['longtime']) {
+          let person = findPerson(notif['longtime']);
+          rows.push(
+            <View key={num} style={styles.list}>
+              <Text style={styles.notiftext}>It's been awhile since you've hung out with {person.data.name}...</Text>
+              <View style={styles.horizontalLine} />
             </View>
-            <Icon style={styles.icon} size={30} name="calendar" />
-            <Pressable style={styles.pressX} onPress={() => deleteFriend(friendData.name)}>
-              <Text style={styles.delete}>X</Text>
-            </Pressable>
-          </View>
-        );
-      }
-    });
-    return rows;
+          );
+        } else if (notif['calinvite']) {
+          let person = findPerson(notif['calinvite']);
+          rows.push(
+            <View key={num} style={styles.list}>
+              <Text style={styles.notiftext}>{person.data.name} has sent you a calendar invite.
+                Click here to accept or deny.</Text>
+              <View style={styles.horizontalLine} />
+            </View>
+          );
+        } else if (notif['friendrequestapproved']) {
+          let person = findPerson(notif['friendrequestapproved']);
+              usersCollectionRef
+                .doc(userId)
+                .update({
+                  ['friends']: firebase.firestore.FieldValue.arrayUnion(person),
+                })
+          rows.push(
+            <View key={num} style={styles.list}>
+              <Text style={styles.notiftext}>{person.data.name} has approved your friend request!</Text>
+              <View style={styles.horizontalLine} />
+            </View>
+          );
+        } else if (notif['approvedcalendarinvite']) {
+          let person = findPerson(notif['approvedcalendarinvite']);
+          rows.push(
+            <View key={num} style={styles.list}>
+              <Text style={styles.notiftext}>{person.data.name} has accepted your calendar invite!</Text>
+              <View style={styles.horizontalLine} />
+            </View>
+          );
+        }
+        num += 1;
+      });
+
+      return rows;
+    }
+    return (<Text> </Text>);
   }
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <View syle={styles.list}>
-        <Text style={styles.title}>FRIENDS</Text>
-        <View style={styles.row}>
-        <View style={styles.searchOval}>
-          <Icon style=
-                  {{marginRight: 10, marginLeft: 5}} size={normalizeHeight(34)} name="magnify" />
-          <TextInput
-            onChangeText={setSearch}
-            value={search}
-            editable
-            maxLength={40}
-            placeholder="Search"
-            style={{fontSize: normalizeHeight(24)}}
-          />
-        </View>
-          <Pressable style=
-                       {{flex: 1, alignItems: 'center', alignContent:'center', margin: 10, marginLeft: 0}}
-                     onPress={() => addFriend()}>
-          <Icon style={styles.icon} size={normalizeHeight(50)} name="account-plus" />
-          </Pressable>
-        </View>
-
-        {displayFriendRows(displayFriends)}
+        <Text style={styles.title}>NOTIFICATIONS</Text>
+        <View style={styles.horizontalLine} />
+          {displayNotifications()}
       </View>
-
     </View>
   );
 }
@@ -141,59 +136,39 @@ const styles = StyleSheet.create({
     flexWrap: 'nowrap',
     alignItems: 'center',
     alignContent: 'flex-end',
-    margin: 10,
+    margin: 30,
+    padding: 30,
   },
   list : {
     flexDirection: 'column',
     flexWrap: 'nowrap',
     alignContent: "flex-start",
-    backgroundColor: '#000',
-  },
-  pfp : {
-    height: 60,
-    width: 60,
-    borderRadius: 50,
-    marginRight: 20,
-  },
-  person : {
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    // alignContent: 'flex-start',
-    flex: 6,
-  },
-  friendText : {
-    fontSize: normalizeHeight(30),
-    flex: 1,
+    backgroundColor: '#FFF',
   },
   icon : {
     color: '#161826',
     marginLeft: 20,
     flex: 1,
   },
-  delete : {
-    fontSize: normalizeHeight(40),
-    color: '#970000',
+  notiftext : {
+    fontSize: normalizeHeight(20),
+    marginTop: 15,
+    marginBottom:15,
   },
-  pressX : {
-    flex: 1,
-    marginLeft: 10
+  horizontalLine: {
+    width: '100%', // Adjust the width as needed
+    height: 2, // Adjust the height as needed
+    backgroundColor: 'rgba(0, 0, 0, 0.2)', // Line color
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        shadowOffset: { width: 0, height: 2 },
+        shadowRadius: 2,
+      },
+      android: {
+        elevation: 2, // Elevation for Android shadow
+      },
+    }),
   },
-  searchIcon : {
-    flex: 1,
-    alignSelf: 'flex-start',
-  },
-  searchOval : {
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-    alignContent: 'flex-end',
-    marginTop : 10,
-    marginBottom: 10,
-    borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#161826',
-    padding: 5,
-    flex: 3
-  }
 });
