@@ -1,7 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Button, ImageBackground, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  Pressable,
+  ImageBackground,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import firestore from "@react-native-firebase/firestore";
 import { StyleSheet } from "react-native";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
+
+GoogleSignin.configure({
+  webClientId:
+    "470016788899-g5nnficdbvkdroefhc9mqpcthhsrkebk.apps.googleusercontent.com",
+});
+
+import { normalizeWidth, normalizeHeight } from "./Responsive";
 
 import useUser from "../api/useUser";
 
@@ -18,6 +33,47 @@ const styles = StyleSheet.create({
     justifyContent: "center", // Center vertically
     alignItems: "center", // Center horizontally
   },
+
+  title: {
+    fontSize: 70,
+    color: "black",
+    fontFamily: "JetBrainsMono-Regular",
+  },
+
+  text: {
+    fontSize: 16,
+    fontFamily: "JetBrainsMono-Regular",
+  },
+
+  input: {
+    height: normalizeHeight(40), // 40
+    width: normalizeWidth(200), // 200
+    borderColor: "gray",
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderRadius: 10,
+    textAlign: "center",
+    fontFamily: "JetBrainsMono-Regular",
+  },
+  button: {
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: "center",
+  },
+  buttonPressed: {
+    opacity: 0.6,
+  },
+  google: {
+    backgroundColor: "white", // Google blue color
+    padding: 8,
+    width: normalizeWidth(200), // 200
+    borderRadius: 10,
+    borderColor: "gray",
+    borderWidth: 1,
+    textAlign: "center",
+    alignSelf: "center",
+    marginTop: 20,
+  },
 });
 
 export default function HomeScreen() {
@@ -25,7 +81,7 @@ export default function HomeScreen() {
 
   const { user, events, friends } = useUser(userId);
 
-  console.log("user", user);
+  // console.log("user", user);
 
   return (
     <View
@@ -39,53 +95,52 @@ export default function HomeScreen() {
         source={require("./Frame.png")}
         style={styles.background}
       >
-        <Text
+        <View
           style={{
-            fontSize: 70,
-            fontWeight: "bold",
-            color: "white",
+            marginBottom: normalizeHeight(300), // 100
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          Login
-        </Text>
-        <View>
-          <TextInput
+          <Text style={styles.title}>Login</Text>
+          <View>
+            <TextInput style={styles.input} placeholder="Username" />
+            <View
+              style={{
+                height: 10,
+              }}
+            ></View>
+            <TextInput style={styles.input} placeholder="Password" />
+          </View>
+          <View
             style={{
-              height: 40,
-              width: 200,
-              borderColor: "gray",
-              borderWidth: 1,
-              backgroundColor: "white",
-              borderRadius: 10,
-              textAlign: "center",
+              height: 5,
             }}
-            placeholder="Username"
-          />
+          ></View>
+
+          <Pressable onPress={() => console.log("pressed")}>
+            {({ pressed }) => (
+              <Text style={[styles.button, pressed && styles.buttonPressed]}>
+                Forgot Password
+              </Text>
+            )}
+          </Pressable>
           <View
             style={{
               height: 10,
             }}
           ></View>
-          <TextInput
-            style={{
-              height: 40,
-              width: 200,
-              borderColor: "gray",
-              borderWidth: 1,
-              backgroundColor: "white",
-              borderRadius: 10,
-              textAlign: "center",
-            }}
-            placeholder="Password"
-          />
-        </View>
 
-        <Button
-          title="Sign in"
-          onPress={() => {
-            console.log("Sign in");
-          }}
-        />
+          <Text style={styles.text}>Or</Text>
+
+          <Pressable onPress={() => console.log("pressed")}>
+            {({ pressed }) => (
+              <Text style={[styles.google, pressed && styles.buttonPressed]}>
+                Sign in with Google
+              </Text>
+            )}
+          </Pressable>
+        </View>
       </ImageBackground>
     </View>
   );

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import firestore from "@react-native-firebase/firestore";
-
-const usersCollection = firestore().collection("Users");
+import useUser from "../api/useUser";
 
 export default function HomeScreen() {
   const userId = "oSyb1pRJCsCCTjf3pB6D";
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
+
+  const { user, events, friends } = useUser(userId);
 
   return (
     <View
@@ -17,6 +18,9 @@ export default function HomeScreen() {
       }}
     >
       <Text>Friends</Text>
+      {friends.map((friend) => (
+        <Text key={friend.id}>{friend.name}</Text>
+      ))}
     </View>
   );
 }
